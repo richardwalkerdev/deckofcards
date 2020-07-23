@@ -63,13 +63,13 @@ pipeline {
                    '''
 
                 echo '### Creating a new app in DEV env ###'
-                script {
-                    openshift.withCluster() {
-                      openshift.withProject(env.DEV_PROJECT) {
-                        openshift.selector("bc", "${APP_NAME}").startBuild("--wait=true", "--follow=true")
-                      }
-                    }
-                }
+//                 script {
+//                     openshift.withCluster() {
+//                       openshift.withProject(env.DEV_PROJECT) {
+//                         openshift.selector("bc", "${APP_NAME}").startBuild("--wait=true", "--follow=true")
+//                       }
+//                     }
+//                 }
                 sh '''
                      oc new-app --name deckofcards django-s2i-base-img~https://github.com/richardwalkerdev/deckofcards.git#master -n ${DEV_PROJECT}
                      oc expose svc/${APP_NAME} -n ${DEV_PROJECT}
