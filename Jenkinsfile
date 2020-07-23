@@ -5,7 +5,7 @@ pipeline {
     }
     agent {
       node {
-        label 'master'
+        label 'jenkins-slave-python'
       }
     }
 
