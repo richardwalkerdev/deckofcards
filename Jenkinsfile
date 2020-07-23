@@ -59,7 +59,7 @@ pipeline {
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
                         sleep 5
-                        oc new-build . --name=${APP_NAME} -n ${DEV_PROJECT}
+                        oc new-build . --docker-image=quay.io/richardwalkerdev/cards --name=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 180
                    '''
 //                     sh '''
@@ -77,7 +77,6 @@ pipeline {
 //                    script {
 //                        openshift.withCluster() {
 //                            openshift.withProject(env.DEV_PROJECT) {
-//
 //                                openshift.newApp("${APP_NAME}:latest", "--name=${APP_NAME}").narrow('svc').expose()
 //}
 //                        }
