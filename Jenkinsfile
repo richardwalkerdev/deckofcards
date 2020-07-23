@@ -58,7 +58,7 @@ pipeline {
                         oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT}
                         oc delete all -l build=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 5
-                        oc new-build python-36 --name=${APP_NAME} -n ${DEV_PROJECT}
+                        oc new-build django-s2i-base-img --name=${APP_NAME} -n ${DEV_PROJECT}
                    '''
 
                 echo '### Creating a new app in DEV env ###'
