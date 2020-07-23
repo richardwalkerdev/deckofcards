@@ -5,7 +5,7 @@ pipeline {
     }
     agent {
       node {
-        label 'jenkins-slave-python-atomic'
+        label 'jenkins-slave-python'
       }
     }
 
