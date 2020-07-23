@@ -7,6 +7,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.0/howto/deployment/asgi/
 """
 
+# pylint: disable=E0611, E0401
+
 import os
 
 from django.core.asgi import get_asgi_application
