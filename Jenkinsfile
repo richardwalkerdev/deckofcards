@@ -32,24 +32,24 @@ pipeline {
             }
         }
 
-        stage('Run Unit Tests') {
-            steps {
-                echo '### Running unit tests ###'
-                sh '''
-                          python manage.py test
-                   '''
-            }
-        }
-
-        stage('Run Lint') {
-            steps {
-                echo '### Running unit tests ###'
-                sh '''
-                          pylint --load-plugins pylint_django main/
-                          pylint --load-plugins pylint_django deckofcards/
-                   '''
-            }
-        }
+//         stage('Run Unit Tests') {
+//             steps {
+//                 echo '### Running unit tests ###'
+//                 sh '''
+//                           python manage.py test
+//                    '''
+//             }
+//         }
+//
+//         stage('Run Lint') {
+//             steps {
+//                 echo '### Running unit tests ###'
+//                 sh '''
+//                           pylint --load-plugins pylint_django main/
+//                           pylint --load-plugins pylint_django deckofcards/
+//                    '''
+//             }
+//         }
 
         stage('Start new app in DEV env') {
             steps {
@@ -58,7 +58,7 @@ pipeline {
                         oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT}
                         oc delete all -l build=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 5
-                        oc new-build django-s2i-base-img --name=${APP_NAME} -n ${DEV_PROJECT}
+                        oc new-build django-s2i-base-img~https://github.com/richardwalkerdev/deckofcards.git --name=${APP_NAME} -n ${DEV_PROJECT}
                    '''
 
                 echo '### Creating a new app in DEV env ###'
