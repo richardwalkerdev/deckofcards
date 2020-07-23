@@ -5,7 +5,7 @@ pipeline {
     }
     agent {
       node {
-        label 'jenkins-slave-python-sql'
+        label 'jenkins-slave-python-sqlite-1'
       }
     }
 
