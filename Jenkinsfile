@@ -23,6 +23,7 @@ pipeline {
                 echo '### SQLite Version'
                 sh '''
                           sqlite3 --version
+                          cat /etc/redhat-release
                    '''
                 echo '### Installing Python packages ###'
                 sh '''
