@@ -14,3 +14,4 @@ class UnitTestCase(TestCase):
         response = self.client.get('/deck/')
         self.assertContains(response, "ace")
         self.assertContains(response, "spades")
+        self.assertContains(response, "joker")
