@@ -58,6 +58,8 @@ pipeline {
             steps {
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
+                        oc delete is ${APP_NAME} -n ${DEV_PROJECT}
+                        oc delete bc ${APP_NAME} -n ${DEV_PROJECT}
                         sleep 5
                         oc new-build . --docker-image=quay.io/richardwalkerdev/cards --name=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 180
@@ -74,13 +76,13 @@ pipeline {
 //                    '''
 
                 echo '### Creating a new app in DEV env ###'
-//                    script {
-//                        openshift.withCluster() {
-//                            openshift.withProject(env.DEV_PROJECT) {
-//                                openshift.newApp("${APP_NAME}:latest", "--name=${APP_NAME}").narrow('svc').expose()
-//}
-//                        }
-//                    }
+                   script {
+                       openshift.withCluster() {
+                           openshift.withProject(env.DEV_PROJECT) {
+                               openshift.newApp("${APP_NAME}:latest", "--name=${APP_NAME}").narrow('svc').expose()
+                           }
+                       }
+                   }
 //                 script {
 //                     openshift.withCluster() {
 //                       openshift.withProject(env.DEV_PROJECT) {
@@ -88,10 +90,10 @@ pipeline {
 //                       }
 //                     }
 //                 }
-                sh '''
-                        oc new-app ${APP_NAME}:latest --name ${APP_NAME} -n ${DEV_PROJECT}
-                        oc expose svc/${APP_NAME} -n ${DEV_PROJECT}
-                   '''
+//                 sh '''
+//                         oc new-app ${APP_NAME}:latest --name ${APP_NAME} -n ${DEV_PROJECT}
+//                         oc expose svc/${APP_NAME} -n ${DEV_PROJECT}
+//                    '''
             }
         }
     }
