@@ -61,24 +61,24 @@ pipeline {
                         oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT}
                         oc delete all -l build=${APP_NAME} -n ${DEV_PROJECT}
                         sleep 5
-                        oc new-build . --name=${APP_NAME} -n ${DEV_PROJECT}
+                        oc new-build . --docker-image=quay.io/richardwalkerdev/cards --name=${APP_NAME} -n ${DEV_PROJECT}
                    '''
 
                 echo '### Creating a new app in DEV env ###'
-                   script {
-                       openshift.withCluster() {
-                           openshift.withProject(env.DEV_PROJECT) {
-                               openshift.newApp('django-s2i-base-img~https://github.com/richardwalkerdev/deckofcards.git#master')
-                           }
-                       }
-                   }
-//                 script {
-//                     openshift.withCluster() {
-//                       openshift.withProject(env.DEV_PROJECT) {
-//                         openshift.selector("bc", "${APP_NAME}").startBuild("--wait=true", "--follow=true")
-//                       }
-//                     }
-//                 }
+//                    script {
+//                        openshift.withCluster() {
+//                            openshift.withProject(env.DEV_PROJECT) {
+//                                openshift.newApp('django-s2i-base-img~https://github.com/richardwalkerdev/deckofcards.git#master')
+//                            }
+//                        }
+//                    }
+                script {
+                    openshift.withCluster() {
+                      openshift.withProject(env.DEV_PROJECT) {
+                        openshift.selector("bc", "${APP_NAME}").startBuild("--wait=true", "--follow=true")
+                      }
+                    }
+                }
 //                 sh '''
 //                      oc new-app --name deckofcards django-s2i-base-img~https://github.com/richardwalkerdev/deckofcards.git#master -n ${DEV_PROJECT}
 //                      oc expose svc/${APP_NAME} -n ${DEV_PROJECT}
