@@ -58,8 +58,8 @@ pipeline {
             steps {
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
-                        oc delete is ${APP_NAME} -n ${DEV_PROJECT}
-                        oc delete bc ${APP_NAME} -n ${DEV_PROJECT}
+//                         oc delete is ${APP_NAME} -n ${DEV_PROJECT}
+//                         oc delete bc ${APP_NAME} -n ${DEV_PROJECT}
 
                         sleep 5
                         oc new-build . --name=${APP_NAME} -n ${DEV_PROJECT}
