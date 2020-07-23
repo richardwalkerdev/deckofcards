@@ -40,5 +40,15 @@ pipeline {
                    '''
             }
         }
+
+        stage('Run Lint') {
+            steps {
+                echo '### Running unit tests ###'
+                sh '''
+                          pylint --load-plugins pylint_django main/
+                          pylint --load-plugins pylint_django decofcards/
+                   '''
+            }
+        }
     }
 }
