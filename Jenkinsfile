@@ -4,9 +4,9 @@ pipeline {
         timeout(time: 60, unit: 'MINUTES')
     }
     agent {
-      docker {
-        image 'python:3.7.2'
-       }
+      node {
+        label 'master'
+      }
     }
 
     environment {
