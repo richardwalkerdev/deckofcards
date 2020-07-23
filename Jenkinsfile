@@ -21,7 +21,9 @@ pipeline {
         stage('Install packages') {
             steps {
                 echo '### SQLite Version'
-                sqlite3 --version
+                sh '''
+                          sqlite3 --version
+                   '''
                 echo '### Installing Python packages ###'
                 sh '''
                           pip install -r requirements.txt
