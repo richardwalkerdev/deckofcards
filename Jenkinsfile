@@ -58,11 +58,21 @@ pipeline {
             steps {
                 echo '### Cleaning existing resources in DEV env ###'
                 sh '''
-                        oc delete all -l app=${APP_NAME} -n ${DEV_PROJECT}
-                        oc delete all -l build=${APP_NAME} -n ${DEV_PROJECT}
+                        oc delete is ${APP_NAME} -n ${DEV_PROJECT}
+                        oc delete bc ${APP_NAME} -n ${DEV_PROJECT}
+
                         sleep 5
-                        oc new-build . --docker-image=quay.io/richardwalkerdev/cards --name=${APP_NAME} -n ${DEV_PROJECT}
+                        oc new-build . --name=${APP_NAME} -n ${DEV_PROJECT}
+                        sleep 180
                    '''
+//                     sh '''
+//                         oc delete is cards ${APP_NAME} -n ${DEV_PROJECT}
+//                         oc delete bc ${APP_NAME} -n ${DEV_PROJECT}
+//
+//                         sleep 5
+//                         oc new-build . --docker-image=quay.io/richardwalkerdev/cards --name=${APP_NAME} -n ${DEV_PROJECT}
+//                         sleep 180
+//                    '''
 
                 echo '### Creating a new app in DEV env ###'
 //                    script {
