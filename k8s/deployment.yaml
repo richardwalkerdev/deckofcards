@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deckofcards
+  name: deckofcards
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dedeckofcardsckofcards
+  template:
+    metadata:
+      labels:
+        app: 
+    spec:
+      containers:
+        - image: image-registry.openshift-image-registry.svc:5000/pipeline-project/deckofcards:latest
+          imagePullPolicy: Always
+          name: deckofcards
+          ports:
+            - containerPort: 8000
+              protocol: TCP
