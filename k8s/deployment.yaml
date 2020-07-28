@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: 
+        app: deckofcards
     spec:
       containers:
         - image: image-registry.openshift-image-registry.svc:5000/pipeline-project/deckofcards:latest
